@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=17 format=3 uid="uid://ch83ajjldwtmx"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
 [ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
 [ext_resource type="Script" path="res://Trees.gd" id="2_bwac0"]
 [ext_resource type="PackedScene" uid="uid://nqa0vk37w5lh" path="res://person.tscn" id="4_2em82"]
+[ext_resource type="Script" path="res://Dock.gd" id="4_2k44j"]
+[ext_resource type="Script" path="res://fps_counter.gd" id="6_tt76x"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
 size = Vector2(10, 10)
@@ -15,6 +17,10 @@ size = Vector2(10, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_n0jnq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vuwik"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dht57"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_d7ir8"]
 
 [sub_resource type="Environment" id="Environment_rglcy"]
 ambient_light_color = Color(1, 1, 1, 1)
@@ -56,6 +62,21 @@ shape = SubResource("BoxShape3D_n0jnq")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="WorkYard"]
 mesh = SubResource("BoxMesh_vuwik")
 
+[node name="Dock" type="Area3D" parent="." node_paths=PackedStringArray("map", "workYard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264246, 0, -14.7636)
+script = ExtResource("4_2k44j")
+map = NodePath("..")
+workYard = NodePath("../WorkYard")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dock"]
+shape = SubResource("ConvexPolygonShape3D_dht57")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Dock"]
+mesh = SubResource("TorusMesh_d7ir8")
+
+[node name="Timer" type="Timer" parent="Dock"]
+autostart = true
+
 [node name="Person" parent="." node_paths=PackedStringArray("moveTarget", "map") instance=ExtResource("4_2em82")]
 moveTarget = NodePath("../Trees")
 map = NodePath("..")
@@ -86,5 +107,14 @@ compositor = SubResource("Compositor_bllqg")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.841506, -0.129409, -0.524519, 0.353553, 0.866025, 0.353553, 0.408494, -0.482963, 0.774519, 0, 2, 0)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_tt76x")
+
 [connection signal="body_entered" from="Trees" to="Trees" method="_on_body_entered"]
 [connection signal="body_entered" from="WorkYard" to="WorkYard" method="_on_body_entered"]
+[connection signal="body_entered" from="Dock" to="Dock" method="_on_body_entered"]
+[connection signal="timeout" from="Dock/Timer" to="Dock" method="_on_timer_timeout"]
