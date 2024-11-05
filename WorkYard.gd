@@ -13,6 +13,6 @@ func ReceiveRawGoods(rawGood:Good):
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("People"):
-		print("Lad went to work")
+		#print("Lad went to work")
 		var lad = body as Person
 		lad.moveTarget = lad.map.trees

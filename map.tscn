@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=18 format=3 uid="uid://ch83ajjldwtmx"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
 [ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://nqa0vk37w5lh" path="res://person.tscn" id="4_2em82"]
 [ext_resource type="Script" path="res://Dock.gd" id="4_2k44j"]
 [ext_resource type="Script" path="res://fps_counter.gd" id="6_tt76x"]
+[ext_resource type="Script" path="res://new_game_panel.gd" id="7_05bab"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
 size = Vector2(10, 10)
@@ -114,7 +115,36 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("6_tt76x")
 
+[node name="NewGamePanel" type="Panel" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("7_05bab")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewGamePanel"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Label" type="Label" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Congratulations! Due to years of hard work, and the fact that you are the Earl of Featheringham, you have been appointed the Governor of our new convict colony. 
+
+Your aim is to transform this hive of scum and villainy into a respectable corner of His Majesty's possessions. 
+
+You have been assigned 12 convicts, 5 guards, a dog, 100 pounds in cold, hard cash, and enough food to last 6 months. 
+
+In the future, more convicts will be sent as you desire or we need somewhere to dump them, and you may also entice free settlers. "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="NewGamePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "OK"
+
 [connection signal="body_entered" from="Trees" to="Trees" method="_on_body_entered"]
 [connection signal="body_entered" from="WorkYard" to="WorkYard" method="_on_body_entered"]
 [connection signal="body_entered" from="Dock" to="Dock" method="_on_body_entered"]
 [connection signal="timeout" from="Dock/Timer" to="Dock" method="_on_timer_timeout"]
+[connection signal="pressed" from="NewGamePanel/VBoxContainer/Button" to="NewGamePanel" method="_on_button_pressed"]
