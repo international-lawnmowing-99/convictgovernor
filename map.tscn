@@ -1,12 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=23 format=3 uid="uid://ch83ajjldwtmx"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
 [ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
 [ext_resource type="Script" path="res://Trees.gd" id="2_bwac0"]
 [ext_resource type="PackedScene" uid="uid://nqa0vk37w5lh" path="res://person.tscn" id="4_2em82"]
 [ext_resource type="Script" path="res://Dock.gd" id="4_2k44j"]
+[ext_resource type="Script" path="res://UI.gd" id="6_ruqpx"]
 [ext_resource type="Script" path="res://fps_counter.gd" id="6_tt76x"]
 [ext_resource type="Script" path="res://new_game_panel.gd" id="7_05bab"]
+[ext_resource type="Texture2D" uid="uid://dl5ccbdulla5x" path="res://icon.svg" id="7_36odg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
 size = Vector2(10, 10)
@@ -28,7 +30,6 @@ ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 3
 tonemap_exposure = 2.9
 tonemap_white = 8.13
-glow_enabled = true
 glow_blend_mode = 0
 fog_enabled = true
 fog_light_color = Color(0.985186, 0.0361834, 0.510245, 1)
@@ -36,6 +37,15 @@ fog_light_color = Color(0.985186, 0.0361834, 0.510245, 1)
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_o6e1k"]
 
 [sub_resource type="Compositor" id="Compositor_bllqg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p3sd6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e6ngj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22mfc"]
+metallic = 1.0
+metallic_specular = 0.24
+metallic_texture = ExtResource("7_36odg")
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_63mga")
@@ -63,11 +73,12 @@ shape = SubResource("BoxShape3D_n0jnq")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="WorkYard"]
 mesh = SubResource("BoxMesh_vuwik")
 
-[node name="Dock" type="Area3D" parent="." node_paths=PackedStringArray("map", "workYard")]
+[node name="Dock" type="Area3D" parent="." node_paths=PackedStringArray("map", "workYard", "ui")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264246, 0, -14.7636)
 script = ExtResource("4_2k44j")
 map = NodePath("..")
 workYard = NodePath("../WorkYard")
+ui = NodePath("../CanvasLayer/UI")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dock"]
 shape = SubResource("ConvexPolygonShape3D_dht57")
@@ -110,12 +121,128 @@ transform = Transform3D(0.841506, -0.129409, -0.524519, 0.353553, 0.866025, 0.35
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="FPSLabel" type="Label" parent="CanvasLayer"]
+[node name="UI" type="ColorRect" parent="CanvasLayer"]
+self_modulate = Color(0.0390486, 4.81308e-08, 0.379957, 1)
+offset_right = 1920.0
+offset_bottom = 140.0
+script = ExtResource("6_ruqpx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 200.0
+
+[node name="PopulationControl" type="Control" parent="CanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/HBoxContainer/PopulationControl"]
+layout_mode = 0
 offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TotalHBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="TotalPopulationLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/TotalHBoxContainer"]
+layout_mode = 2
+text = "13
+"
+
+[node name="TotalPopulationExplainerLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/TotalHBoxContainer"]
+layout_mode = 2
+text = "Total Population"
+
+[node name="ConvictHBoxContainer2" type="HBoxContainer" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/ConvictHBoxContainer2"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="ConvictPopulationLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/ConvictHBoxContainer2"]
+layout_mode = 2
+text = "10
+"
+
+[node name="ConvictPopulationExplainerLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/ConvictHBoxContainer2"]
+layout_mode = 2
+text = "Convicts"
+
+[node name="FreeHBoxContainer3" type="HBoxContainer" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/FreeHBoxContainer3"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="FreeSettlerPopulationLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/FreeHBoxContainer3"]
+layout_mode = 2
+text = "3
+"
+
+[node name="FreeSettlerPopulationExplainerLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/FreeHBoxContainer3"]
+layout_mode = 2
+text = "Free Settlers"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="SoldierPopulationLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "-34"
+
+[node name="SoldierPopulationExplainerLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/PopulationControl/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Soldiers"
+
+[node name="FoodControl" type="Control" parent="CanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/HBoxContainer/FoodControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FoodLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/FoodControl/HBoxContainer"]
+layout_mode = 2
+text = "1500"
+
+[node name="FoodExplainerLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/FoodControl/HBoxContainer"]
+layout_mode = 2
+text = "Food"
+
+[node name="TimeControl" type="Control" parent="CanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/HBoxContainer/TimeControl"]
+layout_mode = 0
+offset_right = 114.0
 offset_bottom = 23.0
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/UI/HBoxContainer/TimeControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "1 January 1970"
+horizontal_alignment = 1
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_left = 1824.0
+offset_top = 15.0
+offset_right = 1872.0
+offset_bottom = 38.0
+text = "Hello?"
 script = ExtResource("6_tt76x")
 
 [node name="NewGamePanel" type="Panel" parent="."]
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 script = ExtResource("7_05bab")
@@ -142,6 +269,16 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 6
 text = "OK"
+
+[node name="GovernmentHouse" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7516, 0, -1.18806)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GovernmentHouse"]
+shape = SubResource("BoxShape3D_p3sd6")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="GovernmentHouse"]
+mesh = SubResource("BoxMesh_e6ngj")
+material = SubResource("StandardMaterial3D_22mfc")
 
 [connection signal="body_entered" from="Trees" to="Trees" method="_on_body_entered"]
 [connection signal="body_entered" from="WorkYard" to="WorkYard" method="_on_body_entered"]
