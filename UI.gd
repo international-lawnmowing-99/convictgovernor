@@ -7,7 +7,11 @@ class_name UI
 @onready var soldierPopLabel:Label = $HBoxContainer/PopulationControl/VBoxContainer/HBoxContainer4/SoldierPopulationLabel
 @onready var foodLabel:Label = $HBoxContainer/FoodControl/HBoxContainer/FoodLabel
 @onready var timeLabel:Label = $HBoxContainer/TimeControl/HBoxContainer/TimeLabel
-#@onready var
+
+@export var camera:Camera3D
+@export var map:Map
+@onready var farm = preload("res://Farm.tscn")
+
 
 func UpdateAll(government:Government):
 	UpdatePopulation(government)
@@ -75,3 +79,15 @@ func UpdateTime(calendar:Calendar):
 func _process(_delta: float) -> void:
 	#UpdateAll()pass
 	pass
+
+
+func _on_new_building_button_pressed() -> void:
+	if camera.building:
+		print("we already have a farm")
+		return
+	print("making a new farm so we can buy it back some day")
+	camera.isPlacingBuilding = true
+	camera.building = farm.instantiate()
+	map.add_child(camera.building)
+
+	pass # Replace with function body.

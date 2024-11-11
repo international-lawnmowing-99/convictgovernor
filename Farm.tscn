@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0do3pitcfqsn"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_6x8ig"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydye1"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vwinx"]
+top_radius = 0.2
+bottom_radius = 0.0
+height = 0.6
+radial_segments = 13
+rings = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyifo"]
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62vxr"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_mkfu3"]
+material = SubResource("StandardMaterial3D_62vxr")
+text = "This is a
+farm, obviously"
+
+[node name="Farm" type="StaticBody3D"]
+collision_layer = 4
+
+[node name="House" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.853496, 0, 0.521099, 0, 1, 0, -0.521099, 0, 0.853496, 0, 0, 0)
+mesh = SubResource("PrismMesh_6x8ig")
+material = SubResource("StandardMaterial3D_ydye1")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.853496, 0.294155, 0.521099)
+mesh = SubResource("CylinderMesh_vwinx")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.241835, 0.285983, 1.21459)
+mesh = SubResource("CylinderMesh_vwinx")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.478464, 0.368606, -1.11775)
+mesh = SubResource("CylinderMesh_vwinx")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09859, 0.367279, 1.13981)
+mesh = SubResource("CylinderMesh_vwinx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_jyifo")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.806724, 0)
+mesh = SubResource("TextMesh_mkfu3")

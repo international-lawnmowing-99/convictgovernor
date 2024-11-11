@@ -16,15 +16,21 @@ var woodStockpile:int = 0
 func _on_timer_timeout() -> void:
 	calendar.GameDay()
 	ui.UpdateTime(calendar)
-	var newPerson:Person = person.instantiate()
-	map.add_child(newPerson)
-	government.convicts.append(newPerson)
-	ui.UpdatePopulation(government)
-	newPerson.position = position
-	newPerson.speed = 1
-	newPerson.map = map
-	newPerson.moveTarget = workYard
+	if government.convicts.size() < 500:
+		var newPerson:Person = person.instantiate()
+		map.add_child(newPerson)
+		government.convicts.append(newPerson)
+		ui.UpdatePopulation(government)
+		newPerson.position = position
+		newPerson.speed = 1
+		newPerson.map = map
+		newPerson.moveTarget = workYard
+
+
+	government.GameDay()
+	ui.UpdateFood(government)
+
+
 	timer.start(.25)
 	ladcount += 1
-	print(str(ladcount) + " lads now")
-	pass # Replace with function body.
+	#print(str(ladcount) + " lads now")
