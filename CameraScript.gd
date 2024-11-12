@@ -4,6 +4,10 @@ extends Camera3D
 const RAY_LENGTH = 1000
 var isPlacingBuilding:bool = false
 var building:StaticBody3D
+var farmUI = preload("res://farm_ui.tscn")
+@export var ui:UI
+
+var openUI:Array[Control] = []
 
 func _process(delta: float) -> void:
 	var moveVector:Vector2
@@ -41,19 +45,27 @@ func _physics_process(_delta):
 				building = null
 	else:
 		var buildingQuery = PhysicsRayQueryParameters3D.create(origin, end, 0b0100)
-		buildingQuery.collide_with_areas = true
+		#buildingQuery.collide_with_areas = true
 		var buildingResult = space_state.intersect_ray(buildingQuery)
 
 		var debugBuilding:StaticBody3D
 		if buildingResult:
-			#if !isPlacingBuilding:
-			debugBuilding = buildingResult["collider"]
-			debugBuilding.get_child(0).material.albedo_color = Color.RED
+			if !isPlacingBuilding:
+				debugBuilding = buildingResult["collider"]
+				debugBuilding.get_child(0).material.albedo_color = Color.from_rgbe9995(randi())
+				if Input.is_action_just_pressed("left_mouse"):
+					print("Clicked " + buildingResult["collider"].name)
+					var newUI:FarmUI = farmUI.instantiate()
+					ui.add_child(newUI)
+					openUI.append(newUI)
+					newUI.set_position(mousepos)
+
+
 				#print("Yay, building " + buildingResult["collider"].name)
 		else:
 			if debugBuilding:
 				debugBuilding.material.albedo_color = Color.GREEN
-
+				debugBuilding = null
 			#if debugBuilding:
 				#debugBuilding.get_child(0).material.albedo_color = Color.GREEN
-				#debugBuilding = null
+				#
