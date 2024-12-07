@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7ekwprebj85l"]
+
+[ext_resource type="Script" path="res://NewShipPanelUI.gd" id="1_ps8lo"]
+
+[node name="NewShipPanelUI" type="Panel"]
+offset_left = -300.0
+offset_bottom = 75.0
+script = ExtResource("1_ps8lo")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 115.0
+offset_bottom = 22.0
+text = "HMAS Vampire"
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 197.0
+offset_bottom = 47.0
+size_flags_horizontal = 6
+text = "Expected 01 January 1970"
+horizontal_alignment = 1
+
+[node name="BaseColour" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 300.0
+offset_bottom = 70.0
+color = Color(1, 0, 0, 1)
+
+[node name="TopColour" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 150.0
+offset_bottom = 70.0
+color = Color(0, 0.65098, 0.462745, 1)

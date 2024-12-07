@@ -1,0 +1,24 @@
+extends Control
+class_name ShipList
+var NewShipPanelUI = preload("res://NewShipPanelUI.tscn")
+
+var incomingSipsList:Array
+@export var calendar:Calendar
+var count:int = 0
+
+func AddNewShip():
+	var newShip:NewShipPanelUI = NewShipPanelUI.instantiate()
+	newShip.shipList = self
+	newShip.shipConvicts = randi()%10 * 10
+	newShip.shipSettlers = randi()%40
+
+	newShip.unixJourneyTime = randi_range(180, 270) * 62400
+	newShip.unixArriveTime = calendar.unixDate + newShip.unixJourneyTime
+
+	count += 1
+	newShip.shipName = "New Ship " + str(count)
+
+	add_child(newShip)
+
+func _process(delta: float) -> void:
+	AddNewShip()
