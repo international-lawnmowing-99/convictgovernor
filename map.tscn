@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=27 format=3 uid="uid://ch83ajjldwtmx"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
 [ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
@@ -11,8 +11,6 @@
 [ext_resource type="Script" path="res://new_game_panel.gd" id="7_05bab"]
 [ext_resource type="Texture2D" uid="uid://dl5ccbdulla5x" path="res://icon.svg" id="7_36odg"]
 [ext_resource type="Script" path="res://ShipList.gd" id="10_gsy83"]
-[ext_resource type="PackedScene" uid="uid://b7ekwprebj85l" path="res://NewShipPanelUI.tscn" id="11_d0pt4"]
-[ext_resource type="Script" path="res://Calendar.gd" id="13_614gd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
 size = Vector2(100, 100)
@@ -91,12 +89,13 @@ shape = SubResource("BoxShape3D_n0jnq")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="WorkYard"]
 mesh = SubResource("BoxMesh_vuwik")
 
-[node name="Dock" type="Area3D" parent="." node_paths=PackedStringArray("map", "workYard", "ui")]
+[node name="Dock" type="Area3D" parent="." node_paths=PackedStringArray("map", "workYard", "ui", "shipList")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264246, 0, -14.7636)
 script = ExtResource("4_2k44j")
 map = NodePath("..")
 workYard = NodePath("../WorkYard")
 ui = NodePath("../CanvasLayer/UI")
+shipList = NodePath("../CanvasLayer/IncomingShipsUI")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dock"]
 shape = SubResource("ConvexPolygonShape3D_dht57")
@@ -329,7 +328,7 @@ expand_mode = 3
 stretch_mode = 5
 flip_v = true
 
-[node name="IncomingShipsUI" type="Control" parent="CanvasLayer"]
+[node name="IncomingShipsUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("dock")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1920.0
@@ -337,9 +336,7 @@ offset_top = 140.0
 offset_right = 1920.0
 offset_bottom = 140.0
 script = ExtResource("10_gsy83")
-
-[node name="NewShipPanelUI" parent="CanvasLayer/IncomingShipsUI" instance=ExtResource("11_d0pt4")]
-layout_mode = 0
+dock = NodePath("../../Dock")
 
 [node name="NewGamePanel" type="Panel" parent="."]
 visible = false
@@ -379,9 +376,6 @@ shape = SubResource("BoxShape3D_p3sd6")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="GovernmentHouse"]
 mesh = SubResource("BoxMesh_e6ngj")
 material = SubResource("StandardMaterial3D_22mfc")
-
-[node name="Calendar" type="Node3D" parent="."]
-script = ExtResource("13_614gd")
 
 [connection signal="body_entered" from="Trees" to="Trees" method="_on_body_entered"]
 [connection signal="body_entered" from="WorkYard" to="WorkYard" method="_on_body_entered"]

@@ -7,7 +7,7 @@ offset_left = -300.0
 offset_bottom = 75.0
 script = ExtResource("1_ps8lo")
 
-[node name="Label" type="Label" parent="."]
+[node name="ShipNameLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = -1.0
 offset_top = -1.0

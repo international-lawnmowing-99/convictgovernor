@@ -3,8 +3,18 @@ class_name ShipList
 var NewShipPanelUI = preload("res://NewShipPanelUI.tscn")
 
 var incomingSipsList:Array
-@export var calendar:Calendar
+@export var dock:Dock
+var calendar:Calendar
 var count:int = 0
+
+func GameDay():
+	for ship:NewShipPanelUI in incomingSipsList:
+		ship.GameDay(dock.calendar.unixDate)
+
+
+func _ready() -> void:
+	calendar = dock.calendar
+	AddNewShip()
 
 func AddNewShip():
 	var newShip:NewShipPanelUI = NewShipPanelUI.instantiate()
@@ -17,8 +27,5 @@ func AddNewShip():
 
 	count += 1
 	newShip.shipName = "New Ship " + str(count)
-
+	incomingSipsList.append(newShip)
 	add_child(newShip)
-
-func _process(delta: float) -> void:
-	AddNewShip()
