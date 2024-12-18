@@ -11,7 +11,8 @@ class_name UI
 @export var camera:Camera3D
 @export var map:Map
 @onready var farm = preload("res://Farm.tscn")
-
+@export var dock:Dock
+@export var buildingListPanel:BuildingList
 
 func UpdateAll(government:Government):
 	UpdatePopulation(government)
@@ -34,12 +35,13 @@ func _process(_delta: float) -> void:
 
 
 func _on_new_building_button_pressed() -> void:
-	if camera.building:
+	if camera.building: #what?
 		print("we already have a farm")
 		return
 	print("making a new farm so we can buy it back some day")
 	camera.isPlacingBuilding = true
 	camera.building = farm.instantiate()
 	map.add_child(camera.building)
-
+	dock.buildings.append(camera.building)
+	buildingListPanel.Populate(dock.buildings)
 	pass # Replace with function body.

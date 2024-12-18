@@ -8,6 +8,7 @@ var person = preload("res://person.tscn")
 @export var ui:UI
 @export var shipList:ShipList
 
+var buildings:Array[Building]
 var government:Government = Government.new()
 
 
@@ -21,7 +22,7 @@ func _on_timer_timeout() -> void:
 	calendar.GameDay()
 	ui.UpdateTime(calendar)
 	shipList.GameDay()
-	if government.convicts.size() < 500:
+	if government.convicts.size() < 5:
 		var newPerson:Person = person.instantiate()
 		map.add_child(newPerson)
 		government.convicts.append(newPerson)

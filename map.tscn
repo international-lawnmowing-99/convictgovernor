@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=29 format=3 uid="uid://ch83ajjldwtmx"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
 [ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
@@ -10,7 +10,9 @@
 [ext_resource type="Script" path="res://CameraScript.gd" id="6_vemx4"]
 [ext_resource type="Script" path="res://new_game_panel.gd" id="7_05bab"]
 [ext_resource type="Texture2D" uid="uid://dl5ccbdulla5x" path="res://icon.svg" id="7_36odg"]
+[ext_resource type="Script" path="res://BuildingListPanel.gd" id="10_3gxsj"]
 [ext_resource type="Script" path="res://ShipList.gd" id="10_gsy83"]
+[ext_resource type="PackedScene" uid="uid://dmiceq7i1nob4" path="res://building_line.tscn" id="11_fhbbp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
 size = Vector2(100, 100)
@@ -140,13 +142,15 @@ transform = Transform3D(0.841506, -0.129409, -0.524519, 0.353553, 0.866025, 0.35
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UI" type="ColorRect" parent="CanvasLayer" node_paths=PackedStringArray("camera", "map")]
+[node name="UI" type="ColorRect" parent="CanvasLayer" node_paths=PackedStringArray("camera", "map", "dock", "buildingListPanel")]
 self_modulate = Color(0.0390486, 4.81308e-08, 0.379957, 1)
 offset_right = 1920.0
 offset_bottom = 140.0
 script = ExtResource("6_ruqpx")
 camera = NodePath("../../Camera3D")
 map = NodePath("../..")
+dock = NodePath("../../Dock")
+buildingListPanel = NodePath("BuildingListPanel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI"]
 layout_mode = 0
@@ -327,6 +331,33 @@ texture = ExtResource("7_36odg")
 expand_mode = 3
 stretch_mode = 5
 flip_v = true
+
+[node name="BuildingListPanel" type="Panel" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_right = 641.0
+offset_bottom = 729.0
+script = ExtResource("10_3gxsj")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UI/BuildingListPanel"]
+layout_mode = 0
+offset_top = 169.0
+offset_right = 637.0
+offset_bottom = 413.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/BuildingListPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuildingLine" parent="CanvasLayer/UI/BuildingListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_fhbbp")]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/UI/BuildingListPanel"]
+layout_mode = 0
+offset_right = 638.0
+offset_bottom = 47.0
+text = "Buildings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IncomingShipsUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("dock")]
 layout_mode = 3
