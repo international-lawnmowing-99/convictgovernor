@@ -4,7 +4,7 @@ extends Resource
 
 var freeEmployees:Array
 var convictEmployeed:Array[Person]
-
+var buildingName:String = "Default buiding"
 var production:int
 var stockPile:int
 var businessCash:float

@@ -1,4 +1,5 @@
 extends Camera3D
+class_name CameraScript
 @export var scrollSpeed = 5
 
 const RAY_LENGTH = 1000

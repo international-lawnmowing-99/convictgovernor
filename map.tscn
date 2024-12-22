@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=31 format=3 uid="uid://ch83ajjldwtmx"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
 [ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://BuildingListPanel.gd" id="10_3gxsj"]
 [ext_resource type="Script" path="res://ShipList.gd" id="10_gsy83"]
 [ext_resource type="PackedScene" uid="uid://dmiceq7i1nob4" path="res://building_line.tscn" id="11_fhbbp"]
+[ext_resource type="Script" path="res://ConvictListPanel.gd" id="12_d4nqn"]
+[ext_resource type="Script" path="res://ConvictLine.gd" id="13_4wsnc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
 size = Vector2(100, 100)
@@ -347,6 +349,7 @@ offset_bottom = 413.0
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/BuildingListPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="BuildingLine" parent="CanvasLayer/UI/BuildingListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_fhbbp")]
 layout_mode = 2
@@ -356,6 +359,36 @@ layout_mode = 0
 offset_right = 638.0
 offset_bottom = 47.0
 text = "Buildings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConvictListPanel" type="Panel" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_left = 728.0
+offset_right = 1369.0
+offset_bottom = 729.0
+script = ExtResource("12_d4nqn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UI/ConvictListPanel"]
+layout_mode = 0
+offset_top = 169.0
+offset_right = 637.0
+offset_bottom = 630.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/ConvictListPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ConvictLine" type="Panel" parent="CanvasLayer/UI/ConvictListPanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("13_4wsnc")
+
+[node name="Title" type="Label" parent="CanvasLayer/UI/ConvictListPanel"]
+layout_mode = 0
+offset_right = 638.0
+offset_bottom = 47.0
+text = "Convicts"
 horizontal_alignment = 1
 vertical_alignment = 1
 

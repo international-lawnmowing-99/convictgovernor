@@ -8,7 +8,9 @@ class_name UI
 @onready var foodLabel:Label = $HBoxContainer/FoodControl/HBoxContainer/FoodLabel
 @onready var timeLabel:Label = $HBoxContainer/TimeControl/HBoxContainer/TimeLabel
 
-@export var camera:Camera3D
+var tempBuilding:Building
+
+@export var camera:CameraScript
 @export var map:Map
 @onready var farm = preload("res://Farm.tscn")
 @export var dock:Dock
@@ -35,13 +37,13 @@ func _process(_delta: float) -> void:
 
 
 func _on_new_building_button_pressed() -> void:
-	if camera.building: #what?
+	if camera.building:
 		print("we already have a farm")
 		return
 	print("making a new farm so we can buy it back some day")
 	camera.isPlacingBuilding = true
 	camera.building = farm.instantiate()
 	map.add_child(camera.building)
-	dock.buildings.append(camera.building)
+	dock.buildings.append(camera.building.get_script())
 	buildingListPanel.Populate(dock.buildings)
 	pass # Replace with function body.
