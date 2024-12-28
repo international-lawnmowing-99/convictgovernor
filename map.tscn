@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=32 format=3 uid="uid://ch83ajjldwtmx"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
 [ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dmiceq7i1nob4" path="res://building_line.tscn" id="11_fhbbp"]
 [ext_resource type="Script" path="res://ConvictListPanel.gd" id="12_d4nqn"]
 [ext_resource type="Script" path="res://ConvictLine.gd" id="13_4wsnc"]
+[ext_resource type="Script" path="res://LandGrid.gd" id="16_d7d62"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
 size = Vector2(100, 100)
@@ -440,6 +441,9 @@ shape = SubResource("BoxShape3D_p3sd6")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="GovernmentHouse"]
 mesh = SubResource("BoxMesh_e6ngj")
 material = SubResource("StandardMaterial3D_22mfc")
+
+[node name="LandTenureGrid" type="Node3D" parent="."]
+script = ExtResource("16_d7d62")
 
 [connection signal="body_entered" from="Trees" to="Trees" method="_on_body_entered"]
 [connection signal="body_entered" from="WorkYard" to="WorkYard" method="_on_body_entered"]

@@ -53,7 +53,7 @@ func _physics_process(_delta):
 		if buildingResult:
 			if !isPlacingBuilding:
 				debugBuilding = buildingResult["collider"]
-				debugBuilding.get_child(0).material.albedo_color = Color.from_rgbe9995(randi())
+				debugBuilding.get_child(0).material.albedo_color = Color.from_hsv(randf(), .333, randf())
 				if Input.is_action_just_pressed("left_mouse"):
 					print("Clicked " + buildingResult["collider"].name)
 					var newUI:FarmUI = farmUI.instantiate()

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvl00uaxvgvhx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5h5w0"]
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64tgo"]
+
+[node name="CSGMesh3D" type="CSGMesh3D"]
+mesh = SubResource("PlaneMesh_5h5w0")
+material = SubResource("StandardMaterial3D_64tgo")

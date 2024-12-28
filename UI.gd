@@ -43,6 +43,8 @@ func _on_new_building_button_pressed() -> void:
 	print("making a new farm so we can buy it back some day")
 	camera.isPlacingBuilding = true
 	camera.building = farm.instantiate()
+	var house = camera.building.get_child(0)
+	house.material = house.material.duplicate()
 	map.add_child(camera.building)
 	dock.buildings.append(camera.building.get_script())
 	buildingListPanel.Populate(dock.buildings)
