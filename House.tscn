@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://defotjnvpl057"]
+
+[ext_resource type="Script" path="res://House.gd" id="1_idan7"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_6x8ig"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydye1"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyifo"]
+size = Vector3(1.1, 0.1, 1.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jr1h4"]
+size = Vector3(0.75, 0.75, 0.75)
+
+[sub_resource type="Curve" id="Curve_hibli"]
+_data = [Vector2(0.290123, 0.351648), 0.0, 0.0, 0, 0, Vector2(0.574074, 0.593407), 0.0, 0.0, 0, 0, Vector2(0.814815, 0.989011), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ns8ky"]
+curve = SubResource("Curve_hibli")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7j7nu"]
+albedo_color = Color(0.945506, 0.829036, 0.87336, 1)
+metallic = 1.0
+roughness = 0.3
+anisotropy_enabled = true
+anisotropy = 0.82
+anisotropy_flowmap = SubResource("CurveTexture_ns8ky")
+
+[node name="House" type="StaticBody3D"]
+collision_layer = 4
+script = ExtResource("1_idan7")
+
+[node name="Roof" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("PrismMesh_6x8ig")
+material = SubResource("StandardMaterial3D_ydye1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0443115, 0, 0.0038147)
+shape = SubResource("BoxShape3D_jyifo")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41974, 0)
+text = "This is a
+house"
+
+[node name="Walls" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+mesh = SubResource("BoxMesh_jr1h4")
+material = SubResource("StandardMaterial3D_7j7nu")

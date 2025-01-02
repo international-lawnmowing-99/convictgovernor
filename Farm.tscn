@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0do3pitcfqsn"]
+[gd_scene load_steps=6 format=3 uid="uid://d0do3pitcfqsn"]
+
+[ext_resource type="Script" path="res://Farm.gd" id="1_7rpsq"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_6x8ig"]
 size = Vector3(1, 0.5, 1)
@@ -18,6 +20,7 @@ size = Vector3(3, 0.1, 3)
 
 [node name="Farm" type="StaticBody3D"]
 collision_layer = 4
+script = ExtResource("1_7rpsq")
 
 [node name="House" type="CSGMesh3D" parent="."]
 transform = Transform3D(0.853496, 0, 0.521099, 0, 1, 0, -0.521099, 0, 0.853496, 0, 0.25, 0)

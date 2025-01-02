@@ -1,6 +1,6 @@
 class_name Building
 
-extends Resource
+extends Node
 
 var freeEmployees:Array
 var convictEmployeed:Array[Person]

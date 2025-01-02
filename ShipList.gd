@@ -1,6 +1,6 @@
 extends Control
 class_name ShipList
-var NewShipPanelUI = preload("res://NewShipPanelUI.tscn")
+var newShipPanelUI = preload("res://NewShipPanelUI.tscn")
 
 var incomingSipsList:Array
 @export var dock:Dock
@@ -17,7 +17,7 @@ func _ready() -> void:
 	AddNewShip()
 
 func AddNewShip():
-	var newShip:NewShipPanelUI = NewShipPanelUI.instantiate()
+	var newShip:NewShipPanelUI = newShipPanelUI.instantiate()
 	newShip.shipList = self
 	newShip.shipConvicts = randi()%10 * 10
 	newShip.shipSettlers = randi()%40

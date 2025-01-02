@@ -4,8 +4,8 @@ class_name LandGrid
 var acreGrid:Array
 var meshGrid:Array
 
-var width = 30
-var height = 30
+var width:int = 30
+var height:int = 30
 
 var debugMesh:PackedScene = preload("res://plain_plane.tscn")
 

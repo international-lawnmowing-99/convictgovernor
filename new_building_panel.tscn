@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://bipvop56n4arr"]
+
+[ext_resource type="Script" path="res://NewBuildingMenu.gd" id="1_5t0p2"]
+[ext_resource type="Texture2D" uid="uid://djwyqgwp24xk0" path="res://cow-animal-face-icon.png" id="2_12d5r"]
+[ext_resource type="Texture2D" uid="uid://cfa2kpx4a2wbc" path="res://houses-icon.png" id="3_ntkry"]
+[ext_resource type="Texture2D" uid="uid://dl5ccbdulla5x" path="res://icon.svg" id="4_2y6d2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjcgw"]
+bg_color = Color(0.47456, 0.666764, 0.318035, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4tkc"]
+bg_color = Color(0.846318, 0.548179, 0.507797, 1)
+
+[node name="NewBuildingPanel" type="Panel"]
+offset_left = 22.0
+offset_top = -156.0
+offset_right = 1819.0
+offset_bottom = -27.0
+script = ExtResource("1_5t0p2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1797.0
+offset_bottom = 126.0
+
+[node name="FarmButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xjcgw")
+icon = ExtResource("2_12d5r")
+expand_icon = true
+
+[node name="HouseButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_n4tkc")
+icon = ExtResource("3_ntkry")
+expand_icon = true
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_2y6d2")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_2y6d2")
+expand_mode = 3
+stretch_mode = 5
+flip_v = true
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_2y6d2")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_2y6d2")
+expand_mode = 3
+stretch_mode = 5
+flip_v = true
+
+[connection signal="pressed" from="HBoxContainer/FarmButton" to="." method="_on_farm_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]

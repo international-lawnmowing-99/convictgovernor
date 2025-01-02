@@ -7,7 +7,7 @@ class_name UI
 @onready var soldierPopLabel:Label = $HBoxContainer/PopulationControl/VBoxContainer/HBoxContainer4/SoldierPopulationLabel
 @onready var foodLabel:Label = $HBoxContainer/FoodControl/HBoxContainer/FoodLabel
 @onready var timeLabel:Label = $HBoxContainer/TimeControl/HBoxContainer/TimeLabel
-
+@onready var newBuildingMenu = $BottomUIBar/NewBuildingPanel
 var tempBuilding:Building
 
 @export var camera:CameraScript
@@ -15,6 +15,7 @@ var tempBuilding:Building
 @onready var farm = preload("res://Farm.tscn")
 @export var dock:Dock
 @export var buildingListPanel:BuildingList
+@export var convictListPanel:ConvictList
 
 func UpdateAll(government:Government):
 	UpdatePopulation(government)
@@ -23,6 +24,7 @@ func UpdateAll(government:Government):
 func UpdatePopulation(government:Government):
 	totalPopLabel.text = str(government.convicts.size())
 	convictPopLabel.text = str(government.convicts.size())
+	convictListPanel.Populate(government.convicts)
 
 
 func UpdateFood(government:Government):
@@ -37,15 +39,13 @@ func _process(_delta: float) -> void:
 
 
 func _on_new_building_button_pressed() -> void:
-	if camera.building:
-		print("we already have a farm")
-		return
-	print("making a new farm so we can buy it back some day")
-	camera.isPlacingBuilding = true
-	camera.building = farm.instantiate()
-	var house = camera.building.get_child(0)
-	house.material = house.material.duplicate()
-	map.add_child(camera.building)
-	dock.buildings.append(camera.building.get_script())
-	buildingListPanel.Populate(dock.buildings)
-	pass # Replace with function body.
+	newBuildingMenu.visible = !newBuildingMenu.visible
+
+
+
+func _on_building_list_button_pressed() -> void:
+	buildingListPanel.visible = !buildingListPanel.visible
+
+
+func _on_convict_list_button_pressed() -> void:
+	convictListPanel.visible = !convictListPanel.visible

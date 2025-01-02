@@ -4,6 +4,9 @@ class_name Person
 @export var moveTarget:Node3D
 @export var map:Map
 
+var house:House
+var workplace:Building
+
 func _process(delta: float) -> void:
 	if !moveTarget:
 		return
