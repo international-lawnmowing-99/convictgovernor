@@ -8,7 +8,7 @@ var person = preload("res://person.tscn")
 @export var ui:UI
 @export var shipList:ShipList
 
-var buildings:Array[Building]
+var buildings:Array
 var government:Government = Government.new()
 
 

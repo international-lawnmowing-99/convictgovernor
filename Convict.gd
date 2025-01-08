@@ -1,4 +1,5 @@
 extends Person
+class_name Convict
 
 var freedomDate:int
 

@@ -3,7 +3,7 @@ class_name Building
 extends Node
 
 var freeEmployees:Array
-var convictEmployeed:Array[Person]
+var convictEmployees:Array[Convict]
 var buildingName:String = "Default buiding"
 var production:int
 var stockPile:int

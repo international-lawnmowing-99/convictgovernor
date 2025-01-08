@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://c01jtodaqpd4b"]
+
+[ext_resource type="Script" path="res://HouseUI.gd" id="1_5ff8t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vllla"]
+bg_color = Color(0.654718, 0.355112, 0.267192, 1)
+
+[node name="HouseUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ff8t")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 588.0
+offset_bottom = 573.0
+
+[node name="HeadingLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 587.0
+offset_bottom = 23.0
+text = "This is a house"
+horizontal_alignment = 1
+
+[node name="NicePicPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 75.0
+offset_right = 273.0
+offset_bottom = 254.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vllla")
+
+[node name="AltTextLabel" type="Label" parent="Panel/NicePicPanel"]
+layout_mode = 0
+offset_right = 223.0
+offset_bottom = 188.0
+text = "Nice pic of a house?"
+
+[node name="LabourersLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 81.0
+offset_right = 554.0
+offset_bottom = 104.0
+text = "Capacity: 10"
+
+[node name="ConvictsLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 113.0
+offset_right = 554.0
+offset_bottom = 136.0
+text = "Current Lodgers: 0"
+
+[node name="ConvictsListButton" type="Button" parent="Panel/ConvictsLabel"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = -5.0
+offset_right = 252.0
+offset_bottom = 26.0
+text = "<List>
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 376.0
+offset_right = 588.0
+offset_bottom = 416.0
+
+[node name="AssignConvictsButton" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 7
+text = "Assign Convicts"
+
+[node name="ExitButton" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 7
+text = "Exit"
+
+[connection signal="pressed" from="Panel/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

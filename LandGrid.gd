@@ -10,9 +10,9 @@ var height:int = 30
 var debugMesh:PackedScene = preload("res://plain_plane.tscn")
 
 func _ready() -> void:
-	for i in range(width):
+	for i:int in range(width):
 		var column:Array[Acre] = []
-		for j in range(height):
+		for j:int in range(height):
 			var acre = Acre.new()
 			column.append(acre)
 

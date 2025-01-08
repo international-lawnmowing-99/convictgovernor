@@ -331,14 +331,20 @@ expand_mode = 3
 stretch_mode = 5
 flip_v = true
 
-[node name="NewBuildingPanel" parent="CanvasLayer/UI/BottomUIBar" instance=ExtResource("10_fwx1v")]
+[node name="NewBuildingPanel" parent="CanvasLayer/UI/BottomUIBar" node_paths=PackedStringArray("camera", "map", "dock", "buildingListPanel") instance=ExtResource("10_fwx1v")]
+visible = false
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 1797.0
-offset_bottom = 129.0
+offset_left = 59.0
+offset_top = -146.0
+offset_right = 1856.0
+offset_bottom = -17.0
+camera = NodePath("../../../../Camera3D")
+map = NodePath("../../../..")
+dock = NodePath("../../../../Dock")
+buildingListPanel = NodePath("../../BuildingListPanel")
 
 [node name="BuildingListPanel" type="Panel" parent="CanvasLayer/UI"]
+visible = false
 layout_mode = 0
 offset_right = 641.0
 offset_bottom = 729.0
@@ -364,6 +370,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ConvictListPanel" type="Panel" parent="CanvasLayer/UI"]
+visible = false
 layout_mode = 0
 offset_left = 728.0
 offset_right = 1369.0

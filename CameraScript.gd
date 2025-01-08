@@ -6,7 +6,10 @@ const RAY_LENGTH = 1000
 var isPlacingBuilding:bool = false
 var building:StaticBody3D
 var farmUI = preload("res://farm_ui.tscn")
+var houseUI = preload("res://house_ui.tscn")
 @export var ui:UI
+
+var currentUIPopup
 
 var openUI:Array[Control] = []
 
@@ -56,10 +59,27 @@ func _physics_process(_delta):
 				debugBuilding.get_child(0).material.albedo_color = Color.from_hsv(randf(), .333, randf())
 				if Input.is_action_just_pressed("left_mouse"):
 					print("Clicked " + buildingResult["collider"].name)
-					var newUI:FarmUI = farmUI.instantiate()
+					var script:Script = debugBuilding.get_script()
+
+					var newUI
+
+					if currentUIPopup:
+						currentUIPopup._on_exit_button_pressed()
+					if script.get_global_name() == "Farm":
+						print("i'm a farm moo")
+						newUI = farmUI.instantiate()
+					elif script.get_global_name() == "House":
+						print("i'm a house mooo")
+						newUI = houseUI.instantiate()
+					else:
+						print("ERROR!: can't find valid script")
+						assert(false)
+
 					ui.add_child(newUI)
+					print(script.get_global_name())
 					openUI.append(newUI)
 					newUI.set_position(mousepos)
+					currentUIPopup = newUI
 
 
 				#print("Yay, building " + buildingResult["collider"].name)
