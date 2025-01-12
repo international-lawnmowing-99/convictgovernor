@@ -17,6 +17,11 @@ var ladcount:int = 4
 
 var foodStockpile:int = 0
 var woodStockpile:int = 0
+func _ready() -> void:
+	var convicts = get_tree().get_nodes_in_group("People")
+
+	for lad in convicts:
+		government.convicts.append(lad)
 
 func _on_timer_timeout() -> void:
 	calendar.GameDay()

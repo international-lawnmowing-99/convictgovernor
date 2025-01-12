@@ -9,6 +9,7 @@ var landRegistry # Need to work out how to store the land that's been granted an
 var taxPolicy
 var cash:float = 9999
 var food = 15000
+
 func GameDay():
 	for convict in convicts:
 		food -= 1

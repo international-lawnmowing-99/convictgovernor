@@ -68,6 +68,7 @@ func _physics_process(_delta):
 					if script.get_global_name() == "Farm":
 						print("i'm a farm moo")
 						newUI = farmUI.instantiate()
+						newUI.farm = debugBuilding
 					elif script.get_global_name() == "House":
 						print("i'm a house mooo")
 						newUI = houseUI.instantiate()
