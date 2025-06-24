@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://c15c7uao205a"]
+
+[ext_resource type="Script" uid="uid://bcgb165ks7q5y" path="res://UI/confirm_choice.gd" id="1_hg5hu"]
+
+[node name="ConfirmChoice" type="Node2D"]
+script = ExtResource("1_hg5hu")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 473.0
+offset_bottom = 243.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 171.0
+offset_right = 473.0
+offset_bottom = 243.0
+
+[node name="ConfirmButton" type="Button" parent="Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "OK"
+
+[node name="CancelButton" type="Button" parent="Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 5
+text = "Cancel"
+
+[node name="Text" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 473.0
+offset_bottom = 163.0
+text = "Are you sure you want to cut your own head off?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/HBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
