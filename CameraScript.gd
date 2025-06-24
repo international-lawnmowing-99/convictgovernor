@@ -56,7 +56,7 @@ func _physics_process(_delta):
 		if buildingResult:
 			if !isPlacingBuilding:
 				debugBuilding = buildingResult["collider"]
-				debugBuilding.get_child(0).material.albedo_color = Color.from_hsv(randf(), .333, randf())
+				debugBuilding.get_child(0).material.albedo_color = Color.from_hsv(randf(), randf_range(.2,3), randf())
 				if Input.is_action_just_pressed("left_mouse"):
 					print("Clicked " + buildingResult["collider"].name)
 					var script:Script = debugBuilding.get_script()
@@ -68,15 +68,19 @@ func _physics_process(_delta):
 					if script.get_global_name() == "Farm":
 						print("i'm a farm moo")
 						newUI = farmUI.instantiate()
+						add_child(newUI)
 						newUI.farm = debugBuilding
+						newUI.assignConvictsPanel.building = debugBuilding
 					elif script.get_global_name() == "House":
 						print("i'm a house mooo")
 						newUI = houseUI.instantiate()
+						add_child(newUI)
 					else:
 						print("ERROR!: can't find valid script")
 						assert(false)
 
-					ui.add_child(newUI)
+					#ui.add_child(newUI)
+					newUI.assignConvictsPanel.building = debugBuilding
 					print(script.get_global_name())
 					openUI.append(newUI)
 					newUI.set_position(mousepos)

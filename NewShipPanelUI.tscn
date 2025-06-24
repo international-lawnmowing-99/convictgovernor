@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7ekwprebj85l"]
 
-[ext_resource type="Script" path="res://NewShipPanelUI.gd" id="1_ps8lo"]
+[ext_resource type="Script" uid="uid://bfdmdxrtejlbb" path="res://NewShipPanelUI.gd" id="1_ps8lo"]
 
 [node name="NewShipPanelUI" type="Panel"]
 offset_left = -300.0

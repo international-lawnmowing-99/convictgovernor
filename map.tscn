@@ -1,24 +1,23 @@
-[gd_scene load_steps=32 format=3 uid="uid://ch83ajjldwtmx"]
+[gd_scene load_steps=33 format=3 uid="uid://ch83ajjldwtmx"]
 
-[ext_resource type="Script" path="res://Map.gd" id="1_63mga"]
-[ext_resource type="Script" path="res://WorkYard.gd" id="1_hn1p6"]
-[ext_resource type="Script" path="res://Trees.gd" id="2_bwac0"]
-[ext_resource type="PackedScene" uid="uid://nqa0vk37w5lh" path="res://person.tscn" id="4_2em82"]
-[ext_resource type="Script" path="res://Dock.gd" id="4_2k44j"]
-[ext_resource type="Script" path="res://UI.gd" id="6_ruqpx"]
-[ext_resource type="Script" path="res://fps_counter.gd" id="6_tt76x"]
-[ext_resource type="Script" path="res://CameraScript.gd" id="6_vemx4"]
-[ext_resource type="Script" path="res://new_game_panel.gd" id="7_05bab"]
+[ext_resource type="Script" uid="uid://cikbnc65fbs4l" path="res://Map.gd" id="1_63mga"]
+[ext_resource type="Script" uid="uid://dck7j7wvfxfy3" path="res://Buildings/WorkYard.gd" id="1_hn1p6"]
+[ext_resource type="Script" uid="uid://b014rd1kxok2r" path="res://Trees.gd" id="2_bwac0"]
+[ext_resource type="Script" uid="uid://w7tbn2ekt04a" path="res://Dock.gd" id="4_2k44j"]
+[ext_resource type="Script" uid="uid://7wjml3okida7" path="res://UI.gd" id="6_ruqpx"]
+[ext_resource type="Script" uid="uid://bchbdxkgiaovs" path="res://fps_counter.gd" id="6_tt76x"]
+[ext_resource type="Script" uid="uid://cgdvwvp3nuppr" path="res://CameraScript.gd" id="6_vemx4"]
+[ext_resource type="Script" uid="uid://dgkoqx41j3377" path="res://new_game_panel.gd" id="7_05bab"]
 [ext_resource type="Texture2D" uid="uid://dl5ccbdulla5x" path="res://icon.svg" id="7_36odg"]
-[ext_resource type="Script" path="res://BuildingListPanel.gd" id="10_3gxsj"]
+[ext_resource type="Script" uid="uid://083u5fnb5jim" path="res://BuildingListPanel.gd" id="10_3gxsj"]
 [ext_resource type="PackedScene" uid="uid://bipvop56n4arr" path="res://new_building_panel.tscn" id="10_fwx1v"]
-[ext_resource type="Script" path="res://ShipList.gd" id="10_gsy83"]
-[ext_resource type="Script" path="res://ConvictListPanel.gd" id="12_d4nqn"]
-[ext_resource type="Script" path="res://ConvictLine.gd" id="13_4wsnc"]
-[ext_resource type="Script" path="res://LandGrid.gd" id="16_d7d62"]
+[ext_resource type="Script" uid="uid://bkone754f0sth" path="res://ShipList.gd" id="10_gsy83"]
+[ext_resource type="Script" uid="uid://da258fokxb6rx" path="res://ConvictListPanel.gd" id="12_d4nqn"]
+[ext_resource type="Script" uid="uid://b5vgxanhggy32" path="res://ConvictLine.gd" id="13_4wsnc"]
+[ext_resource type="Script" uid="uid://b00jlc5ht4q44" path="res://LandGrid.gd" id="16_d7d62"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_60n8d"]
-size = Vector2(100, 100)
+[sub_resource type="BoxMesh" id="BoxMesh_2wwcf"]
+size = Vector3(100, 0.1, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37upv"]
 albedo_texture = ExtResource("7_36odg")
@@ -38,14 +37,15 @@ size = Vector3(1000, 0.1, 1000)
 
 [sub_resource type="TorusMesh" id="TorusMesh_d7ir8"]
 
-[sub_resource type="Environment" id="Environment_rglcy"]
-ambient_light_color = Color(1, 1, 1, 1)
-tonemap_mode = 3
-tonemap_exposure = 2.9
-tonemap_white = 8.13
-glow_blend_mode = 0
-fog_enabled = true
-fog_light_color = Color(0.985186, 0.0361834, 0.510245, 1)
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_2wwcf"]
+sun_disk_scale = 3.35
+
+[sub_resource type="Sky" id="Sky_wbpbn"]
+sky_material = SubResource("PhysicalSkyMaterial_2wwcf")
+
+[sub_resource type="Environment" id="Environment_a6rn7"]
+sky = SubResource("Sky_wbpbn")
+ambient_light_source = 3
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_o6e1k"]
 
@@ -68,7 +68,7 @@ collision_layer = 2
 
 [node name="Ground" type="CSGMesh3D" parent="FlatEarth" groups=["ground"]]
 layers = 2
-mesh = SubResource("PlaneMesh_60n8d")
+mesh = SubResource("BoxMesh_2wwcf")
 material = SubResource("StandardMaterial3D_37upv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FlatEarth"]
@@ -111,32 +111,13 @@ mesh = SubResource("TorusMesh_d7ir8")
 [node name="Timer" type="Timer" parent="Dock"]
 autostart = true
 
-[node name="Person" parent="." node_paths=PackedStringArray("moveTarget", "map") instance=ExtResource("4_2em82")]
-moveTarget = NodePath("../Trees")
-map = NodePath("..")
-
-[node name="Person2" parent="." node_paths=PackedStringArray("moveTarget", "map") instance=ExtResource("4_2em82")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95377, 0.270926, -2.30003)
-moveTarget = NodePath("../Trees")
-map = NodePath("..")
-
-[node name="Person3" parent="." node_paths=PackedStringArray("moveTarget", "map") instance=ExtResource("4_2em82")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270926, 2.84101)
-moveTarget = NodePath("../Trees")
-map = NodePath("..")
-
-[node name="Person4" parent="." node_paths=PackedStringArray("moveTarget", "map") instance=ExtResource("4_2em82")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.66751, 0.270926, 0)
-moveTarget = NodePath("../WorkYard")
-map = NodePath("..")
-
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("ui")]
 transform = Transform3D(1, 0, 0, 0, 0.518027, 0.855364, 0, -0.855364, 0.518027, 0.268067, 5.33678, 5.258)
 script = ExtResource("6_vemx4")
 ui = NodePath("../CanvasLayer/UI")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_rglcy")
+environment = SubResource("Environment_a6rn7")
 camera_attributes = SubResource("CameraAttributesPhysical_o6e1k")
 compositor = SubResource("Compositor_bllqg")
 

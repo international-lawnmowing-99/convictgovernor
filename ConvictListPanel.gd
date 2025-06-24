@@ -4,7 +4,7 @@ var convictLine = preload("res://convict_line.tscn")
 @export var dock:Dock
 @onready var container = $ScrollContainer/VBoxContainer
 
-func Populate(allConvicts:Array[Person]):
+func Populate(allConvicts:Array[Convict]):
 	for line in container.get_children():
 		line.queue_free()
 	for lad:Person in allConvicts:

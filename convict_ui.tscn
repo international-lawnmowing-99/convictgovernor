@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0as01ieonfeg"]
 
-[ext_resource type="Script" path="res://ConvictUI.gd" id="1_vueql"]
+[ext_resource type="Script" uid="uid://c5grrs17p7h1w" path="res://ConvictUI.gd" id="1_vueql"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_df1kb"]
 bg_color = Color(0, 0.541176, 0.258824, 1)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cllorcd1pgx1n"]
+[gd_scene load_steps=6 format=3 uid="uid://cllorcd1pgx1n"]
 
-[ext_resource type="Script" path="res://FarmUI.gd" id="1_ecnlu"]
-[ext_resource type="Script" path="res://ConvictListBuilding.gd" id="2_57rw3"]
-[ext_resource type="Script" path="res://ConvictLine.gd" id="3_moipn"]
+[ext_resource type="Script" uid="uid://c2t5wcpkqmerh" path="res://FarmUI.gd" id="1_ecnlu"]
+[ext_resource type="Script" uid="uid://n54e8448kfxb" path="res://ConvictListBuilding.gd" id="2_57rw3"]
+[ext_resource type="Script" uid="uid://b5vgxanhggy32" path="res://ConvictLine.gd" id="3_moipn"]
+[ext_resource type="Script" uid="uid://cryu43652i1hw" path="res://ConvictListAssign.gd" id="4_ucihl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_df1kb"]
 bg_color = Color(0, 0.541176, 0.258824, 1)
@@ -92,7 +93,6 @@ size_flags_horizontal = 7
 text = "Exit"
 
 [node name="ConvictListPanel" type="Panel" parent="Panel"]
-visible = false
 layout_mode = 0
 offset_left = 728.0
 offset_right = 1369.0
@@ -128,7 +128,7 @@ layout_mode = 0
 offset_left = 728.0
 offset_right = 1369.0
 offset_bottom = 729.0
-script = ExtResource("2_57rw3")
+script = ExtResource("4_ucihl")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/AssignConvictPanel"]
 layout_mode = 0
@@ -140,10 +140,6 @@ offset_bottom = 630.0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="ConvictLine" type="Panel" parent="Panel/AssignConvictPanel/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("3_moipn")
 
 [node name="Title" type="Label" parent="Panel/AssignConvictPanel"]
 layout_mode = 0

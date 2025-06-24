@@ -1,7 +1,7 @@
 extends Resource
 class_name Government
 
-var convicts:Array[Person]
+var convicts:Array[Convict]
 var soldiers:Array
 var clerks:Array
 

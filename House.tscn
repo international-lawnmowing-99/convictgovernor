@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://defotjnvpl057"]
 
-[ext_resource type="Script" path="res://House.gd" id="1_idan7"]
+[ext_resource type="Script" uid="uid://di1pqlkes8pqt" path="res://House.gd" id="1_idan7"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_6x8ig"]
 size = Vector3(1, 0.5, 1)

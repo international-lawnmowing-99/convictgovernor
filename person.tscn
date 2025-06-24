@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://nqa0vk37w5lh"]
 
-[ext_resource type="Script" path="res://Person.gd" id="1_hoxbj"]
+[ext_resource type="Script" uid="uid://bgb27uw0i1jl2" path="res://Convict.gd" id="1_ihahw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5lcnl"]
 radius = 0.1
@@ -12,8 +12,7 @@ height = 0.6
 
 [node name="Person" type="CharacterBody3D" groups=["People"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270926, 0)
-script = ExtResource("1_hoxbj")
-speed = 1.0
+script = ExtResource("1_ihahw")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)

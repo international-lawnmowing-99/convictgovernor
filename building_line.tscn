@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dmiceq7i1nob4"]
 
-[ext_resource type="Script" path="res://BuildingLine.gd" id="1_gt7bg"]
+[ext_resource type="Script" uid="uid://bvakd52udsvap" path="res://BuildingLine.gd" id="1_gt7bg"]
 
 [node name="BuildingLine" type="Panel"]
 custom_minimum_size = Vector2(300, 50)
