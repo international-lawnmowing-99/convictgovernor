@@ -11,15 +11,16 @@ radius = 0.1
 height = 0.6
 
 [node name="Person" type="CharacterBody3D" groups=["People"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.270926, 0)
 script = ExtResource("1_ihahw")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.721, 0)
 text = "Hello Friends"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271, 0)
 shape = SubResource("CapsuleShape3D_5lcnl")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271, 0)
 mesh = SubResource("CapsuleMesh_pt17c")

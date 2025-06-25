@@ -2,6 +2,9 @@ extends Camera3D
 class_name CameraScript
 @export var scrollSpeed = 5
 
+const MAXHEIGHT = 50
+const MINHEIGHT = 5
+
 const RAY_LENGTH = 1000
 var isPlacingBuilding:bool = false
 var building:StaticBody3D
@@ -23,9 +26,17 @@ func _process(delta: float) -> void:
 		moveVector.y -= 1
 	if Input.is_action_pressed("MoveDown"):
 		moveVector.y += 1
+	if Input.is_action_just_pressed("mouse_wheel_up"):
+		position.y /= 1.25
+		if position.y < MINHEIGHT:
+			position.y = MINHEIGHT
+	if Input.is_action_just_pressed("mouse_wheel_down"):
+		position.y *= 1.25
+		if position.y > MAXHEIGHT:
+			position.y = MAXHEIGHT
 
 	moveVector = moveVector.normalized()
-	position += Vector3(moveVector.x, 0, moveVector.y) * delta * scrollSpeed
+	position += Vector3(moveVector.x, 0, moveVector.y) * delta * scrollSpeed * (position.y/MINHEIGHT * position.y/MINHEIGHT)
 
 
 func _physics_process(_delta):
@@ -80,7 +91,6 @@ func _physics_process(_delta):
 						assert(false)
 
 					#ui.add_child(newUI)
-					newUI.assignConvictsPanel.building = debugBuilding
 					print(script.get_global_name())
 					openUI.append(newUI)
 					newUI.set_position(mousepos)
